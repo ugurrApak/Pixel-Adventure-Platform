@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,14 +18,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         float horizontal = UnityEngine.Input.GetAxisRaw("Horizontal");
         PlayerMove(horizontal);
         GroundCheck();
-        Jump();
-        DoubleJump();
-       // Debug.Log(canDoubleJump);
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+        Debug.Log(isGround);
+        Debug.Log(canDoubleJump);
     }
     void PlayerMove(float horizontal)
     {
@@ -49,21 +53,14 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        if (rb != null && isGround)
+        if (isGround)
         {
-            rb.AddForce(new Vector2(rb.velocity.x,Input.GetAxisRaw("Jump") * 1000 * jumpForce * Time.fixedDeltaTime));
-            if (Input.GetAxisRaw("Jump") != 0) canDoubleJump = true;
-          
+            rb.AddForce(new Vector2(rb.velocity.x, 1000 * jumpForce * Time.fixedDeltaTime));
+            canDoubleJump = true;
         }
-    }
-    void DoubleJump()
-    {
-        Debug.Log(canDoubleJump);
-
-        if (canDoubleJump && Input.GetKeyDown(KeyCode.Space))
+        else if (canDoubleJump)
         {
-            Debug.Log(0);
-            rb.AddForce(new Vector2(rb.velocity.x, rb.velocity.y + (1000 * jumpForce * Time.fixedDeltaTime)));
+            rb.AddForce(new Vector2(rb.velocity.x, 1000 * jumpForce * Time.fixedDeltaTime));
             canDoubleJump = false;
         }
     }
