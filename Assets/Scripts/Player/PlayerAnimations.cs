@@ -13,7 +13,13 @@ public class PlayerAnimations : MonoBehaviour
     }
     private void Update()
     {
+        UpdateAnimationState();
+    }
+    void UpdateAnimationState()
+    {
         anim.SetBool("IsRun", player.IsRun);
         anim.SetBool("IsJump", player.IsJump);
+        anim.SetBool("IsDoubleJump", player.IsDoubleJump);
+        anim.SetBool("IsFall", player.IsFall);
     }
 }
