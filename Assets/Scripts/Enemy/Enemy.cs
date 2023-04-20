@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
+        Debug.DrawRay(transform.position, new Vector2(-1 * transform.localScale.x, 0f) * 55f,Color.red);
         if (!isShooting && CanShoot())
         {
             isShooting = true;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 790652945637532774}
   - component: {fileID: 8961802268114682982}
   - component: {fileID: 3406096956214658808}
+  - component: {fileID: 1095559109}
   m_Layer: 0
   m_Name: ApplePrefab
   m_TagString: Untagged
@@ -114,3 +115,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0824b961916ffb45825daba84e84ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1095559109
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216830258854550280}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f171b50255d79d247b739931abf25437, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

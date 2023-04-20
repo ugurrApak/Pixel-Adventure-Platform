@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7268086693239304022}
   - component: {fileID: 9222916725417071515}
   - component: {fileID: 314745634897204158}
+  - component: {fileID: 164165453}
   m_Layer: 0
   m_Name: MelonPrefab
   m_TagString: Untagged
@@ -114,3 +115,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b420c2fb66c296642a00dd29bee10e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &164165453
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5314578365683192385}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4f2878603e3c5264791a48d52a6d6c74, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

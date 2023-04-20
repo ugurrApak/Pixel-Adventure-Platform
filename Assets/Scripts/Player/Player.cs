@@ -12,16 +12,11 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] FriendlyBulletObjectPool objectPool = null;
     private Health health;
-    private Transform liveImagesUIParent;
-    List<Image> lives;
     private int initialHealthValue = 3;
     float cooldown = 0.5f;
     private void Awake()
     {
         objectPool = GameObject.FindGameObjectWithTag("FriendlyObjectPool").GetComponent<FriendlyBulletObjectPool>();
-        liveImagesUIParent = GameObject.Find("Canvas/HealthBarPanel").transform;
-        lives = liveImagesUIParent.GetComponentsInChildren<Image>().ToList();
-        lives.RemoveAt(0);
     }
     private void OnEnable()
     {
@@ -56,17 +51,7 @@ public class Player : MonoBehaviour
     }
     private void UpdateHealthBar()
     {
-        for (int i = 0; i < lives.Count; i++)
-        {
-            if(i >= health.CurrentHealth)
-            {
-                lives[i].color = Color.black;
-            }
-            else
-            {
-                lives[i].color = Color.white;
-            }
-        }
+        HealthBar.Instance.UpdateHealthBar(health);
     }
 
     public void Death()

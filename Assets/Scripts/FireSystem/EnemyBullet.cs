@@ -12,8 +12,6 @@ public class EnemyBullet : MonoBehaviour
     private int initialHealth = 1;
     [SerializeField]
     private Health health;
-
-    // Start is called before the first frame update
     void Start()
     {
         health = GetComponent<Health>();

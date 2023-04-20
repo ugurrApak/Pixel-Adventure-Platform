@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -9052152875771539151}
   - component: {fileID: 7002931955065566165}
   - component: {fileID: 6133315516104474784}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FriendlyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,11 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50957a20399c4f94f9b48cfe3b34be51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: -9052152875771539151}
-  deathDelay: 5
   initialHealth: 1
   health: {fileID: 6133315516104474784}
-  playerTransform: {fileID: 0}
+  parentTransform: {fileID: 0}
 --- !u!114 &6133315516104474784
 MonoBehaviour:
   m_ObjectHideFlags: 0
