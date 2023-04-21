@@ -5,8 +5,8 @@ using UnityEngine;
 public class WaypointFollower : MonoBehaviour
 {
     [SerializeField] List<Transform> waypoints;
+    [SerializeField] float speed = 2.3f;
     int currentWaypointIndex = 0;
-    float speed = 2.3f;
     private void Update()
     {
         if (Vector2.Distance(waypoints[currentWaypointIndex].position,transform.position) < .1f)
