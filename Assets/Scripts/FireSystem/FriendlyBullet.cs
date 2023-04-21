@@ -36,7 +36,7 @@ public class FriendlyBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IHitable hittable = collision.GetComponent<IHitable>();
-        if (hittable != null)
+        if (hittable != null && !collision.GetComponent<Player>())
         {
             hittable.GetHit(1, gameObject);
             health.GetHit(1, gameObject);

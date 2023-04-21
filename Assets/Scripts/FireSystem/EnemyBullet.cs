@@ -32,7 +32,7 @@ public class EnemyBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IHitable hittable = collision.GetComponent<IHitable>();
-        if (hittable != null)
+        if (hittable != null && collision.tag != "Enemy")
         {
             hittable.GetHit(1, gameObject);
             health.GetHit(1, gameObject);
