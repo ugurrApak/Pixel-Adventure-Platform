@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
-            WallJump();
         }
         Slide();
         ChangeGravityOnFalling();
