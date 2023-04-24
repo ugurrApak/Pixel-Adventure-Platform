@@ -8,11 +8,14 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] LayerMask layer;
+    [SerializeField] LayerMask wallLayer;
     [SerializeField] float speed = 5.6f;//Player speed on the x-axis
     [SerializeField] float boxCastDistance = 0.7f;//Ground checking.
     [SerializeField] float jumpHeight = 5f;//Limited jump distance.
     [SerializeField] float fallingGravityScale = 22f; //gravity as the player falls.
     [SerializeField] float gravityScale = 9.13f; //World gravity
+    [SerializeField] float wallSlideSpeed = 2f;
+    [SerializeField] Transform wallCheckPosition;
     float jumpForce = 9.2f;//Jumping power.
     BoxCollider2D playerCollider;
     private bool canDoubleJump = false;
@@ -20,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isJump;
     private bool isFall;
     private bool isDoubleJump;
-
+    private bool isWallSlide;
     public bool IsDoubleJump
     {
         get { return isDoubleJump; }
@@ -41,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         get { return isRun; }
         private set { isRun = value; }
     }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -51,7 +55,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+            WallJump();
         }
+        Slide();
         ChangeGravityOnFalling();
     }
     private void FixedUpdate()
@@ -119,6 +125,22 @@ public class PlayerMovement : MonoBehaviour
             isJump = false;
             isFall = true;
             rb.gravityScale = fallingGravityScale;
+        }
+    }
+    private bool WallCheck()
+    {
+        return Physics2D.OverlapCircle(wallCheckPosition.position, 0.4f, wallLayer);
+    }
+    void Slide()
+    {
+        if (WallCheck() && !GroundCheck())
+        {
+            isWallSlide = true;
+            rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
+        }
+        else
+        {
+            isWallSlide = false;
         }
     }
 }

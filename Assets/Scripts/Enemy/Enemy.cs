@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyBulletObjectPool objectPool;
     Animator anim;
     Health health;
+    CollisionSide side;
     int initialHealthValue = 1;
     bool isShooting;
     private void OnEnable()
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
     }
     private void Awake()
     {
+        side = GetComponent<CollisionSide>();
         objectPool = GameObject.FindGameObjectWithTag("EnemyObjectPool").GetComponent<EnemyBulletObjectPool>();
         anim= GetComponent<Animator>();
 
@@ -76,5 +78,12 @@ public class Enemy : MonoBehaviour
     {
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Player>())
+        {
+            Destroy(gameObject,0.5f);
+        }
     }
 }
