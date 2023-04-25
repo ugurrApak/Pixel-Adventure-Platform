@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravityScale = 9.13f; //World gravity
     [SerializeField] float wallSlideSpeed = 2f;
     [SerializeField] Transform wallCheckPosition;
+    float wallJumpingDirection;
     float jumpForce = 9.2f;//Jumping power.
     BoxCollider2D playerCollider;
     private bool canDoubleJump = false;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+            WallJump();
         }
         Slide();
         ChangeGravityOnFalling();
@@ -140,6 +142,16 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isWallSlide = false;
+        }
+    }
+    void WallJump()
+    {
+        if (isWallSlide)
+        {
+            wallJumpingDirection = -transform.localScale.x;
+            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
+            rb.velocity = new Vector2(speed * wallJumpingDirection * 10f, jumpForce);
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 }
