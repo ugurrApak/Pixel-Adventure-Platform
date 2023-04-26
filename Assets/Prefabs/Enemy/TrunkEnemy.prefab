@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 2343686897286046267}
   - component: {fileID: 445009353}
   - component: {fileID: 9172051704475977097}
-  - component: {fileID: 1403880971212959456}
+  - component: {fileID: 486917847}
   m_Layer: 2
   m_Name: Enemy
   m_TagString: Enemy
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 900510490011815592, guid: 4febb8b8e45ed2a44a7df3a2541ba43e, type: 3}
   objectPool: {fileID: 0}
+  parent: {fileID: 8450557101175981273}
 --- !u!114 &1024683991284180284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.14807248, y: -0.24756378}
+  m_Offset: {x: 0.03106916, y: -0.20577687}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -228,7 +229,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.503921, y: 1.3920552}
+  m_Size: {x: 1.7379277, y: 1.475629}
   m_EdgeRadius: 0
 --- !u!95 &445009353
 Animator:
@@ -268,8 +269,8 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
---- !u!61 &1403880971212959456
-BoxCollider2D:
+--- !u!58 &486917847
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -281,19 +282,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04923737, y: 0.74471617}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 2}
-    newSize: {x: 4, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.011564791, y: 0.47505933}
   serializedVersion: 2
-  m_Size: {x: 0.7995672, y: 0.19052458}
-  m_EdgeRadius: 0
+  m_Radius: 0.2919355
 --- !u!1 &8450557101175981273
 GameObject:
   m_ObjectHideFlags: 0

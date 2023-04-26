@@ -12,11 +12,15 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] EnemyBulletObjectPool objectPool;
+    [SerializeField] GameObject parent;
+    float animJumpForce;
+    Rigidbody2D rb;
+    BoxCollider2D enemyCollider;
     Animator anim;
     Health health;
-    CollisionSide side;
     int initialHealthValue = 1;
     bool isShooting;
+    bool isDieByBullet;
     private void OnEnable()
     {
         if(health == null)
@@ -32,7 +36,8 @@ public class Enemy : MonoBehaviour
     }
     private void Awake()
     {
-        side = GetComponent<CollisionSide>();
+        rb = GetComponent<Rigidbody2D>();
+        enemyCollider= GetComponent<BoxCollider2D>();
         objectPool = GameObject.FindGameObjectWithTag("EnemyObjectPool").GetComponent<EnemyBulletObjectPool>();
         anim= GetComponent<Animator>();
 
@@ -45,6 +50,7 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine(Shoot());
         }
+        //Death();
     }
     IEnumerator Shoot()
     {
@@ -76,20 +82,35 @@ public class Enemy : MonoBehaviour
     }
     private void Death()
     {
-        GetComponent<Collider2D>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled = false;
+        isDieByBullet = true;
+        StartCoroutine(WaitHitAnimation());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Player>())
         {
+            isDieByBullet = false;
             StartCoroutine(WaitHitAnimation());
         }
     }
     IEnumerator WaitHitAnimation()
     {
         anim.SetTrigger("Death");
+        if (isDieByBullet)
+        {
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            rb.AddForce(new Vector2(rb.velocity.x, 4f), ForceMode2D.Impulse);
+        }
+        else
+        {
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            rb.AddForce(new Vector2(rb.velocity.x, 20f), ForceMode2D.Impulse);
+        }
+        rb.gravityScale = 0f;
         yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[0].length);
-        Destroy(gameObject);
+        rb.gravityScale = 9.13f;
+        enemyCollider.enabled = false;
+        yield return new WaitForSeconds(2f);
+        Destroy(parent);
     }
 }
