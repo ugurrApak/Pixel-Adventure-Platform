@@ -83,7 +83,13 @@ public class Enemy : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            Destroy(gameObject,0.5f);
+            StartCoroutine(WaitHitAnimation());
         }
+    }
+    IEnumerator WaitHitAnimation()
+    {
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[0].length);
+        Destroy(gameObject);
     }
 }

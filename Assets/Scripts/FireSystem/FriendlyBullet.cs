@@ -42,5 +42,9 @@ public class FriendlyBullet : MonoBehaviour
             health.GetHit(1, gameObject);
             Destroy(gameObject);
         }
+        else if (!collision.GetComponent<Player>())
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
