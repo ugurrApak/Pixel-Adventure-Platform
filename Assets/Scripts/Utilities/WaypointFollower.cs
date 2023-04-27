@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaypointFollower : MonoBehaviour
 {
     [SerializeField] List<Transform> waypoints;
-    [SerializeField] float speed = 2.3f;
+    public float speed = 2.3f;
     int currentWaypointIndex = 0;
     private void Update()
     {
