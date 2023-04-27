@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] EnemyBulletObjectPool objectPool;
     [SerializeField] GameObject parent;
-    float animJumpForce;
     Rigidbody2D rb;
     BoxCollider2D enemyCollider;
     Animator anim;
@@ -99,7 +98,7 @@ public class Enemy : MonoBehaviour
         if (isDieByBullet)
         {
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            rb.AddForce(new Vector2(rb.velocity.x, 4f), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(rb.velocity.x, 2f), ForceMode2D.Impulse);
         }
         else
         {

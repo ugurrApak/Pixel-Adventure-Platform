@@ -8,13 +8,12 @@ public class Snall : MonoBehaviour
 {
     [SerializeField] GameObject parent;
     WaypointFollower waypointFollower;
-    float animJumpForce;
     Rigidbody2D rb;
     BoxCollider2D enemyCollider;
     Animator anim;
     Health health;
+    bool inShell;
     int initialHealthValue = 1;
-    bool isDieByBullet;
     private void OnEnable()
     {
         if (health == null)
@@ -37,36 +36,27 @@ public class Snall : MonoBehaviour
     }
     private void Death()
     {
-        isDieByBullet = true;
         StartCoroutine(WaitHitAnimation());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Player>())
         {
-            isDieByBullet = false;
-            StartCoroutine(WaitHitAnimation());
+            anim.SetTrigger("Death");
+            waypointFollower.speed = 15f;
+            anim.SetTrigger("InShell");
         }
     }
     IEnumerator WaitHitAnimation()
     {
-        //anim.SetTrigger("Death");
-        if (isDieByBullet)
-        {
-            gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            rb.AddForce(new Vector2(rb.velocity.x, 4f), ForceMode2D.Impulse);
-        }
-        else
-        {
-            //gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            rb.AddForce(new Vector2(rb.velocity.x, 20f), ForceMode2D.Impulse);
-            waypointFollower.speed = 25f;
-        }
+        anim.SetTrigger("Death");
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        rb.AddForce(new Vector2(rb.velocity.x, 2f), ForceMode2D.Impulse);
         rb.gravityScale = 0f;
-        yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[0].length);
+        yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[0].length/2f);
         rb.gravityScale = 9.13f;
         enemyCollider.enabled = false;
-        //yield return new WaitForSeconds(2f);
-        //Destroy(parent);
+        yield return new WaitForSeconds(2f);
+        Destroy(parent);
     }
 }

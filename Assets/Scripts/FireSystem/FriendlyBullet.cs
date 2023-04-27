@@ -40,7 +40,7 @@ public class FriendlyBullet : MonoBehaviour
         {
             hittable.GetHit(1, gameObject);
             health.GetHit(1, gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if (!collision.GetComponent<Player>())
         {
