@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class MaınMenu : MonoBehaviour
 {
     [SerializeField] Canvas settingsPanel;
+    [SerializeField] Canvas levelSelectPanel;
     private void Awake()
     {
         settingsPanel.gameObject.SetActive(false);
+        levelSelectPanel.gameObject.SetActive(false);
     }
     public void CloseSettingPanel()
     {
@@ -21,5 +23,13 @@ public class MaınMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+    }
+    public void CloseLevelSelect()
+    {
+        levelSelectPanel.gameObject.SetActive(false);
+    }
+    public void LevelSelect()
+    {
+        levelSelectPanel.gameObject.SetActive(true);
     }
 }
