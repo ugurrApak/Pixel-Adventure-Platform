@@ -11,12 +11,17 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] FriendlyBulletObjectPool objectPool = null;
+    Rigidbody2D rb;
+    Animator anim;
     private Health health;
     private int initialHealthValue = 3;
     float cooldown = 0.5f;
+    public static bool IsDead { get; set; }
     private void Awake()
     {
         objectPool = GameObject.FindGameObjectWithTag("FriendlyObjectPool").GetComponent<FriendlyBulletObjectPool>();
+        rb = GetComponent<Rigidbody2D>();
+        anim= GetComponent<Animator>();
     }
     private void OnEnable()
     {
@@ -28,12 +33,14 @@ public class Player : MonoBehaviour
         health.OnDeath.AddListener(Death);
         health.OnDeath.AddListener(UpdateHealthBar);
         health.OnHit.AddListener(UpdateHealthBar);
+        health.OnHit.AddListener(Hit);
     }
     private void OnDisable()
     {
         health.OnDeath.RemoveListener(Death);
         health.OnDeath.RemoveListener(UpdateHealthBar);
         health.OnHit.RemoveListener(UpdateHealthBar);
+        health.OnHit.RemoveListener(Hit);
     }
     void Update()
     {
@@ -41,6 +48,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Shoot());
         }
+        DeadZone();
     }
     IEnumerator Shoot()
     {
@@ -56,7 +64,30 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        StartCoroutine(WaitDeadAnimaton());
+    }
+    private void Hit()
+    {
+        anim.Play("Hit");
+        rb.AddForce(new Vector2(-transform.localScale.x * 10f,20f),ForceMode2D.Impulse);
+    }
+    private void DeadZone()
+    {
+        if(transform.position.y < -3f)
+        {
+            IsDead = true;
+            Destroy(gameObject,2f);
+        }
+    }
+    IEnumerator WaitDeadAnimaton()
+    {
+        Hit();
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled= false;
+        rb.gravityScale = 0f;
+        yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[0].length);
+        rb.gravityScale = 9.13f;
+        IsDead = true;
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

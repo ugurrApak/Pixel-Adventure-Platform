@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravityScale = 9.13f; //World gravity
     [SerializeField] float wallSlideSpeed = 2f;
     [SerializeField] Transform wallCheckPosition;
+    Player player;
     float wallJumpingDirection;
     float jumpForce = 9.2f;//Jumping power.
     BoxCollider2D playerCollider;
@@ -53,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if(Player.IsDead)
+            return;
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
