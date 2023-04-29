@@ -6,7 +6,7 @@ using UnityEngine;
 public class CherryText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI cherryText;
-    int cherryCount;
+    public static int cherryCount;
     private void OnEnable()
     {
         Cherry.OnCherryCollected += IncrementCherryCount;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AppleText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI appleText;
-    int appleCount;
+    public static int appleCount;
     private void OnEnable()
     {
         Apple.OnAppleCollected += IncrementAppleCount;

@@ -73,10 +73,10 @@ public class Player : MonoBehaviour
     }
     private void DeadZone()
     {
-        if(transform.position.y < -3f)
+        if(transform.position.y < -5f)
         {
             IsDead = true;
-            Destroy(gameObject,2f);
+            Destroy(gameObject,1f);
         }
     }
     IEnumerator WaitDeadAnimaton()

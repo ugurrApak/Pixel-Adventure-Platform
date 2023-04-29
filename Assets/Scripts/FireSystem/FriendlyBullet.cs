@@ -14,24 +14,10 @@ public class FriendlyBullet : MonoBehaviour
     [SerializeField]
     private Health health;
     [SerializeField]
-    Transform parentTransform;
     void Awake()
     {
         health = GetComponent<Health>();
         health.InitializeHealth(initialHealth);
-        parentTransform = GameObject.FindWithTag("Player").transform;
-    }
-    private void Update()
-    {
-        if (transform.position.x > 17 || transform.position.x < -22)
-        {
-            DeathAfterDelay();
-        }
-    }
-    void DeathAfterDelay()
-    {
-        health.GetHit(1, gameObject);
-        gameObject.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

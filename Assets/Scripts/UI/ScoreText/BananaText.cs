@@ -6,7 +6,7 @@ using UnityEngine;
 public class BananaText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI bananaText;
-    int bananaCount;
+    public static int bananaCount;
     private void OnEnable()
     {
         Banana.OnBananaCollected += IncrementBananaCount;

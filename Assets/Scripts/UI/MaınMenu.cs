@@ -22,7 +22,7 @@ public class MaınMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneLoader.Instance.LoadNextLevel();
     }
     public void CloseLevelSelect()
     {

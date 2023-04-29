@@ -21,6 +21,5 @@ public class Banana : MonoBehaviour,ICollectible
         yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[1].length);
         Destroy(gameObject);
         OnBananaCollected?.Invoke();
-        StartCoroutine(WaitBananaAnimation());
     }
 }

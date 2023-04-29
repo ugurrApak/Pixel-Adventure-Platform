@@ -6,7 +6,7 @@ using UnityEngine;
 public class MelonText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI melonText;
-    int melonCount;
+    public static int melonCount;
     private void OnEnable()
     {
         Melon.OnMelonCollected += IncrementMelonCount;

@@ -21,6 +21,5 @@ public class Melon : MonoBehaviour,ICollectible
         yield return new WaitForSeconds(anim.runtimeAnimatorController.animationClips[1].length);
         Destroy(gameObject);
         OnMelonCollected?.Invoke();
-        StartCoroutine(WaitMelonAnimation());
     }
 }
