@@ -9,13 +9,20 @@ public class WaypointFollower : MonoBehaviour
     int currentWaypointIndex = 0;
     private void Update()
     {
-        if (Vector2.Distance(waypoints[currentWaypointIndex].position,transform.position) < .1f)
+        FollowWaypoint();
+    }
+    private void FollowWaypoint()
+    {
+        if (Vector2.Distance(waypoints[currentWaypointIndex].position, transform.position) < .1f)
         {
             currentWaypointIndex++;
-            transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
-            if(currentWaypointIndex >= waypoints.Count)
+            if (!gameObject.GetComponent<StickyObjects>())
             {
-                currentWaypointIndex= 0;
+                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            }
+            if (currentWaypointIndex >= waypoints.Count)
+            {
+                currentWaypointIndex = 0;
             }
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].position, speed * Time.deltaTime);

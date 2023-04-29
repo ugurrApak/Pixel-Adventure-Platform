@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if(Player.IsDead)
+        if(Player.IsDead || !UIManager.Ingame)
             return;
         if (Input.GetButtonDown("Jump"))
         {
@@ -66,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (Player.IsDead || !UIManager.Ingame)
+            return;
         float horizontal = Input.GetAxisRaw("Horizontal");
         PlayerMove(horizontal);
     }

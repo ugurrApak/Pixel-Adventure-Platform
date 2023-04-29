@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     Animator anim;
-    public static SceneLoader Instance { get; private set; }
+    public static SceneLoader Instance { get; set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,6 +31,10 @@ public class SceneLoader : MonoBehaviour
     public void RestartLevel()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    }
+    public void LoadLevelWithIndex(int index)
+    {
+        StartCoroutine(LoadLevel(index));
     }
     IEnumerator LoadLevel(int index)
     {
