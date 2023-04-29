@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravityScale = 9.13f; //World gravity
     [SerializeField] float wallSlideSpeed = 2f;
     [SerializeField] Transform wallCheckPosition;
-    Player player;
+    AudioSource jumpSound;
     float wallJumpingDirection;
     float jumpForce = 9.2f;//Jumping power.
     BoxCollider2D playerCollider;
@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
+        jumpSound= GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -103,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GroundCheck())
         {
+            jumpSound.Play();
             isJump= true;
             jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
             rb.AddForce(new Vector2(rb.velocity.x,jumpForce),ForceMode2D.Impulse);
@@ -110,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (canDoubleJump)
         {
+            jumpSound.Play();
             isJump= false;
             IsDoubleJump = true;
             jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));

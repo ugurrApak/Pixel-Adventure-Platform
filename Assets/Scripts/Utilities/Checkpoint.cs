@@ -7,6 +7,11 @@ public class Checkpoint : MonoBehaviour
 {
     int topLevel;
     int currentLevel;
+    AudioSource winSound;
+    private void Awake()
+    {
+        winSound= GetComponent<AudioSource>();
+    }
     private void Start()
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
@@ -16,18 +21,27 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            if (topLevel < currentLevel + 1 && currentLevel + 1 < SceneManager.sceneCountInBuildSettings)
-            {
-                PlayerPrefs.SetInt("topLevel",currentLevel + 1);
-            }
-            if(currentLevel + 1 < SceneManager.sceneCountInBuildSettings)
-            {
-                SceneLoader.Instance.LoadNextLevel();
-            }
-            else
-            {
-                SceneLoader.Instance.LoadMainMenu();
-            }
+            Save();
+            NextLevel();
+            winSound.Play();
+        }
+    }
+    void Save()
+    {
+        if (topLevel < currentLevel + 1 && currentLevel + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            PlayerPrefs.SetInt("topLevel", currentLevel + 1);
+        }
+    }
+    void NextLevel()
+    {
+        if (currentLevel + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneLoader.Instance.LoadNextLevel();
+        }
+        else
+        {
+            SceneLoader.Instance.LoadMainMenu();
         }
     }
 }
