@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
         GameObject obj = objectPool.GetPooledObject();
         obj.transform.position = transform.position;
         obj.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x, 0f) * FriendlyBullet.speed;
+        AudioManager.Instance.Play("PlayerShoot");
         yield return new WaitForSeconds(cooldown);
     }
     private void UpdateHealthBar()

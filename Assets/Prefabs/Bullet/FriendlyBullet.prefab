@@ -123,7 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialHealth: 1
   health: {fileID: 6133315516104474784}
-  parentTransform: {fileID: 0}
 --- !u!114 &6133315516104474784
 MonoBehaviour:
   m_ObjectHideFlags: 0

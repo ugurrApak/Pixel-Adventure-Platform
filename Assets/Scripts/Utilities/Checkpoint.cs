@@ -7,11 +7,6 @@ public class Checkpoint : MonoBehaviour
 {
     int topLevel;
     int currentLevel;
-    AudioSource winSound;
-    private void Awake()
-    {
-        winSound= GetComponent<AudioSource>();
-    }
     private void Start()
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
@@ -23,7 +18,8 @@ public class Checkpoint : MonoBehaviour
         {
             Save();
             NextLevel();
-            winSound.Play();
+            AudioManager.Instance.Stop("Theme");
+            AudioManager.Instance.Play("WinSound");
         }
     }
     void Save()

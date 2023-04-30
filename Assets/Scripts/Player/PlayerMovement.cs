@@ -55,8 +55,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if(Player.IsDead || !UIManager.Ingame)
-            return;
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -67,8 +65,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Player.IsDead || !UIManager.Ingame)
-            return;
         float horizontal = Input.GetAxisRaw("Horizontal");
         PlayerMove(horizontal);
     }
@@ -104,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GroundCheck())
         {
-            jumpSound.Play();
+            AudioManager.Instance.Play("Jump");
             isJump= true;
             jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
             rb.AddForce(new Vector2(rb.velocity.x,jumpForce),ForceMode2D.Impulse);
@@ -112,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (canDoubleJump)
         {
-            jumpSound.Play();
-            isJump= false;
+            AudioManager.Instance.Play("Jump");
+            isJump = false;
             IsDoubleJump = true;
             jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
             rb.AddForce(new Vector2(rb.velocity.x,jumpForce),ForceMode2D.Impulse);

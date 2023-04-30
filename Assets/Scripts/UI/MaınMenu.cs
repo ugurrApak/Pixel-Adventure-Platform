@@ -39,7 +39,6 @@ public class MaınMenu : MonoBehaviour
                 levels[i].interactable = false;
                 levels[i].GetComponentsInChildren<Image>()[2].gameObject.SetActive(true);
                 levels[i].GetComponentsInChildren<Image>()[1].gameObject.SetActive(false);
-                Debug.Log(levels[i].GetComponentsInChildren<Image>().Length);
             }
         }
     }

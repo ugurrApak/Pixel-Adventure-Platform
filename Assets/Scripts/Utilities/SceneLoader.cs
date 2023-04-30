@@ -30,6 +30,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void RestartLevel()
     {
+        AudioManager.Instance.Stop("Theme");
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
     }
     public void LoadLevelWithIndex(int index)
@@ -40,6 +41,14 @@ public class SceneLoader : MonoBehaviour
     {
         anim.SetTrigger("Start");
         yield return new WaitForSeconds(1.5f);
+        if(index != 0)
+        {
+            AudioManager.Instance.Play("Theme");
+        }
+        else
+        {
+            AudioManager.Instance.Stop("Theme");
+        }
         SceneManager.LoadScene(index);
     }
 }

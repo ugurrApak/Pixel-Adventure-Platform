@@ -24,8 +24,14 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PausePanel.SetActive(true);
-            Ingame = false;
+            if(Ingame)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
         }
     }
     IEnumerator DelayLosePanel()
@@ -36,17 +42,36 @@ public class UIManager : MonoBehaviour
     }
     public void RestartLevel()
     {
+        Time.timeScale = 1f;
         Player.IsDead = false;
         SceneLoader.Instance.RestartLevel();
         Ingame = true;
     }
     public void Close()
     {
-        PausePanel.SetActive(false);
-        Ingame = true;
+        Resume();
     }
     public void LoadMainMenu()
     {
+        Time.timeScale = 1f;
+        Ingame = true;
         SceneLoader.Instance.LoadMainMenu();
+    }
+    void Pause()
+    {
+        PausePanel.SetActive(true);
+        AudioManager.Instance.Pause("Theme");
+        Time.timeScale = 0F;
+        Ingame = false;
+    }
+    void Resume()
+    {
+        PausePanel.SetActive(false);
+        if (!AudioManager.Instance.IsPlaying("Theme"))
+        {
+            AudioManager.Instance.Play("Theme");
+        }
+        Time.timeScale = 1F;
+        Ingame = true;
     }
 }
