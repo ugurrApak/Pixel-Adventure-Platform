@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         Ingame = true;
+        Player.IsDead = false;
         SceneLoader.Instance.LoadMainMenu();
     }
     void Pause()
