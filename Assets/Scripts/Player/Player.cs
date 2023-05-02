@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && UIManager.Ingame)
         {
             StartCoroutine(Shoot());
         }
@@ -70,18 +70,21 @@ public class Player : MonoBehaviour
     private void Hit()
     {
         anim.Play("Hit");
+        AudioManager.Instance.Play("Hit");
         rb.AddForce(new Vector2(-transform.localScale.x * 10f,20f),ForceMode2D.Impulse);
     }
     private void DeadZone()
     {
-        if(transform.position.y < -5f)
+        if(transform.position.y < -5f && GetComponent<Collider2D>().enabled)
         {
+            AudioManager.Instance.Play("LoseSound");
             IsDead = true;
             Destroy(gameObject,1f);
         }
     }
     IEnumerator WaitDeadAnimaton()
     {
+        AudioManager.Instance.Play("LoseSound");
         Hit();
         GetComponent<Collider2D>().enabled = false;
         rb.gravityScale = 0f;

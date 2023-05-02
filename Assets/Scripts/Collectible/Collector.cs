@@ -9,6 +9,7 @@ public class Collector : MonoBehaviour
         ICollectible collectible = collision.GetComponent<ICollectible>();
         if(collectible != null)
         {
+            AudioManager.Instance.Play("Pickup");
             collectible.Collect();
         }
     }
