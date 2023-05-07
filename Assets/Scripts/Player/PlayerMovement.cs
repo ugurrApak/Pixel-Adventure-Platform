@@ -154,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         {
             wallJumpingDirection = -transform.localScale.x;
             jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
-            rb.velocity = new Vector2(speed * wallJumpingDirection * 10f, jumpForce);
+            rb.velocity = new Vector2(speed * wallJumpingDirection * 25f, jumpForce);
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }

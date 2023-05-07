@@ -9,9 +9,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject losePanel;
     [SerializeField] GameObject PausePanel;
     [SerializeField] TMP_Text score;
+    [SerializeField] TMP_Text bestScore;
     public static bool Ingame = true;
     private void Awake()
     {
+        if (!PlayerPrefs.HasKey("BestScore"))
+        {
+            PlayerPrefs.SetInt("BestScore",0);
+        }
         losePanel.SetActive(false);
         PausePanel.SetActive(false);
     }
@@ -39,10 +44,21 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         losePanel.SetActive(true);
         score.text = ((AppleText.appleCount + CherryText.cherryCount + BananaText.bananaCount + MelonText.melonCount) * 10).ToString();
+        //AppleText.appleCount = 0; CherryText.cherryCount = 0; BananaText.bananaCount = 0; MelonText.melonCount = 0;
+        if (((AppleText.appleCount + CherryText.cherryCount + BananaText.bananaCount + MelonText.melonCount) * 10) < PlayerPrefs.GetInt("BestScore"))
+        {
+            bestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("BestScore",(AppleText.appleCount + CherryText.cherryCount + BananaText.bananaCount + MelonText.melonCount) * 10);
+            bestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+        }
     }
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+        AppleText.appleCount = 0; CherryText.cherryCount = 0; BananaText.bananaCount = 0; MelonText.melonCount = 0;
         Player.IsDead = false;
         SceneLoader.Instance.RestartLevel();
         Ingame = true;
@@ -54,6 +70,7 @@ public class UIManager : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
+        AppleText.appleCount = 0; CherryText.cherryCount = 0; BananaText.bananaCount = 0; MelonText.melonCount = 0;
         Ingame = true;
         Player.IsDead = false;
         SceneLoader.Instance.LoadMainMenu();
