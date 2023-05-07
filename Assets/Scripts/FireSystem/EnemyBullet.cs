@@ -17,17 +17,6 @@ public class EnemyBullet : MonoBehaviour
         health = GetComponent<Health>();
         health.InitializeHealth(initialHealth);
     }
-    private void Update()
-    {
-        StartCoroutine(DeathAfterDelay(deathDelay));
-    }
-
-    private IEnumerator DeathAfterDelay(float deathDelay)
-    {
-        yield return new WaitForSeconds(deathDelay);
-        health.GetHit(1, gameObject);
-        gameObject.SetActive(false);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

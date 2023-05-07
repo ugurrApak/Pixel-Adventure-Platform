@@ -30,9 +30,19 @@ public class MaınMenu : MonoBehaviour
         {
             if (i < topLevel)
             {
-                levels[i].interactable = true;
-                levels[i].GetComponentsInChildren<Image>()[1].gameObject.SetActive(true);
-                levels[i].GetComponentsInChildren<Image>()[2].gameObject.SetActive(false);
+                if(i < 9)
+                {
+                    levels[i].interactable = true;
+                    levels[i].GetComponentsInChildren<Image>()[1].gameObject.SetActive(true);
+                    levels[i].GetComponentsInChildren<Image>()[2].gameObject.SetActive(false);
+                }
+                else
+                {
+                    levels[i].interactable = true;
+                    levels[i].GetComponentsInChildren<Image>()[2].gameObject.SetActive(true);
+                    levels[i].GetComponentsInChildren<Image>()[3].gameObject.SetActive(true);
+                    levels[i].GetComponentsInChildren<Image>()[4].gameObject.SetActive(false);
+                }
             }
             else
             {
@@ -65,5 +75,9 @@ public class MaınMenu : MonoBehaviour
     public void LoadLevel(int index)
     {
         SceneLoader.Instance.LoadLevelWithIndex(index);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

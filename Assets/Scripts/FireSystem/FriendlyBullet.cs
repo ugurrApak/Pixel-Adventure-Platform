@@ -22,13 +22,13 @@ public class FriendlyBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IHitable hittable = collision.GetComponent<IHitable>();
-        if (hittable != null && !collision.GetComponent<Player>())
+        if (hittable != null && !collision.GetComponent<Player>() && !collision.GetComponent<Cherry>() && !collision.GetComponent<Banana>() && !collision.GetComponent<Melon>() && !collision.GetComponent<Apple>())
         {
             hittable.GetHit(1, gameObject);
             health.GetHit(1, gameObject);
             gameObject.SetActive(false);
         }
-        else if (!collision.GetComponent<Player>())
+        else if (!collision.GetComponent<Player>() && !collision.GetComponent<Cherry>() && !collision.GetComponent<Banana>() && !collision.GetComponent<Melon>() && !collision.GetComponent<Apple>())
         {
             gameObject.SetActive(false);
         }
