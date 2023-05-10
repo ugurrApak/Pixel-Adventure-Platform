@@ -7,7 +7,6 @@ public class EnemyBullet : MonoBehaviour
 {
     public static float speed = 14.7f;
     [SerializeField] Rigidbody2D rb2d;
-    [SerializeField] float deathDelay = 5;
     [SerializeField]
     private int initialHealth = 1;
     [SerializeField]
